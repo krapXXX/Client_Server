@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>currency</title>
+</head>
+
+<body>
+
+    <table id="currency">
+        <tr>
+            <td>
+               <div>1$</div>
+            </td>
+            <td>
+               <div class="usd"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>1€</div>
+            </td>
+            <td>
+               <div class="eur"></div>
+            </td>
+        </tr>
+    </table>
+    
+    <script>
+        
+        let usd = document.querySelector(".usd")
+        let eur = document.querySelector(".eur")
+
+        
+        let url = `https://v6.exchangerate-api.com/v6/${'53df75e34a089f807aa4d123'}/latest/${'usd'}`;
+        fetch(url).then((response) => response.json()).then((data) => 
+        {
+            usd.textContent = data.conversion_rates.UAH + "₴"
+        })
+        url = `https://v6.exchangerate-api.com/v6/${'53df75e34a089f807aa4d123'}/latest/${'eur'}`;
+        fetch(url).then((response) => response.json()).then((data) => 
+        {
+            eur.textContent = data.conversion_rates.UAH + "₴"
+        })
+    
+    </script>
+</body>
+</html>

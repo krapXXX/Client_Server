@@ -3,7 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>currency</title>
+    <title>Currency</title>
+    <style>
+        body {
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: black;
+            border-radius: 10px;
+            overflow: hidden;
+            color: white;
+        }
+
+        td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid white;
+        }
+
+        td:first-child {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+
+        .usd, .eur {
+            text-decoration: underline red;
+        }
+
+        div 
+        {
+            font-weight: bold;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,22 +67,20 @@
     </table>
     
     <script>
-        
-        let usd = document.querySelector(".usd")
-        let eur = document.querySelector(".eur")
+        const usd = document.querySelector(".usd");
+        const eur = document.querySelector(".eur");
 
-        
-        let url = `https://v6.exchangerate-api.com/v6/${'53df75e34a089f807aa4d123'}/latest/${'usd'}`;
-        fetch(url).then((response) => response.json()).then((data) => 
-        {
-            usd.textContent = data.conversion_rates.UAH + "₴"
-        })
-        url = `https://v6.exchangerate-api.com/v6/${'53df75e34a089f807aa4d123'}/latest/${'eur'}`;
-        fetch(url).then((response) => response.json()).then((data) => 
-        {
-            eur.textContent = data.conversion_rates.UAH + "₴"
-        })
-    
+        const fetchCurrency = (currency, element) => {
+            const url = `https://v6.exchangerate-api.com/v6/53df75e34a089f807aa4d123/latest/${currency}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    element.textContent = data.conversion_rates.UAH + "₴";
+                });
+        };
+
+        fetchCurrency('USD', usd);
+        fetchCurrency('EUR', eur);
     </script>
 </body>
 </html>
